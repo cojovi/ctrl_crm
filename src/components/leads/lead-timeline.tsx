@@ -106,7 +106,7 @@ const mockTimelineEvents = [
   {
     id: '1',
     leadId: '1',
-    type: 'status_change',
+    type: 'status_change' as const,
     content: 'Lead status changed from New to In Progress',
     timestamp: '2025-05-10T10:30:00Z',
     user: 'Sarah Admin',
@@ -118,7 +118,7 @@ const mockTimelineEvents = [
   {
     id: '2',
     leadId: '1',
-    type: 'note',
+    type: 'note' as const,
     content: 'Contacted customer via phone. They are interested in getting a quote for a new garage door.',
     timestamp: '2025-05-10T10:35:00Z',
     user: 'Sarah Admin',
@@ -126,20 +126,20 @@ const mockTimelineEvents = [
   {
     id: '3',
     leadId: '1',
-    type: 'appointment',
+    type: 'appointment' as const,
     content: 'Scheduled an appointment for a site visit to provide a quote.',
     timestamp: '2025-05-10T11:00:00Z',
     user: 'Sarah Admin',
     data: {
       date: 'May 15, 2025',
-      time: '2:00 PM - 4:00 PM',
+      time: '2:00  PM - 4:00 PM',
       technician: 'Alex Rodriguez',
     },
   },
   {
     id: '4',
     leadId: '1',
-    type: 'quote',
+    type: 'quote' as const,
     content: 'Created quote for new garage door installation.',
     timestamp: '2025-05-15T16:30:00Z',
     user: 'Alex Rodriguez',
@@ -147,7 +147,7 @@ const mockTimelineEvents = [
   {
     id: '5',
     leadId: '1',
-    type: 'status_change',
+    type: 'status_change' as const,
     content: 'Lead status changed from In Progress to Quote Sent',
     timestamp: '2025-05-15T16:45:00Z',
     user: 'Alex Rodriguez',

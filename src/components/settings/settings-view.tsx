@@ -5,7 +5,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
@@ -18,12 +17,9 @@ import {
   Users, 
   CreditCard, 
   Settings, 
-  Shield, 
   Database,
   Mail,
   Phone,
-  Calendar,
-  Palette,
   Globe,
   Save,
   Upload,
@@ -86,6 +82,10 @@ export function SettingsView() {
       title: 'Settings saved',
       description: 'Your settings have been updated successfully.',
     });
+  };
+
+  const handleNotificationChange = (key: keyof typeof notifications, value: boolean) => {
+    setNotifications(prev => ({ ...prev, [key]: value }));
   };
 
   return (
@@ -377,7 +377,7 @@ export function SettingsView() {
                       </div>
                       <Switch
                         checked={notifications.emailEnabled}
-                        onCheckedChange={(checked) => setNotifications({ ...notifications, emailEnabled: checked })}
+                        onCheckedChange={(checked) => handleNotificationChange('emailEnabled', checked)}
                       />
                     </div>
                     <div className="flex items-center justify-between">
@@ -387,7 +387,7 @@ export function SettingsView() {
                       </div>
                       <Switch
                         checked={notifications.smsEnabled}
-                        onCheckedChange={(checked) => setNotifications({ ...notifications, smsEnabled: checked })}
+                        onCheckedChange={(checked) => handleNotificationChange('smsEnabled', checked)}
                       />
                     </div>
                     <div className="flex items-center justify-between">
@@ -397,7 +397,7 @@ export function SettingsView() {
                       </div>
                       <Switch
                         checked={notifications.pushEnabled}
-                        onCheckedChange={(checked) => setNotifications({ ...notifications, pushEnabled: checked })}
+                        onCheckedChange={(checked) => handleNotificationChange('pushEnabled', checked)}
                       />
                     </div>
                   </div>
@@ -409,16 +409,16 @@ export function SettingsView() {
                   <h4 className="font-medium">Alert Types</h4>
                   <div className="space-y-3">
                     {[
-                      { key: 'appointmentReminders', label: 'Appointment Reminders' },
-                      { key: 'lowInventoryAlerts', label: 'Low Inventory Alerts' },
-                      { key: 'customerFeedback', label: 'Customer Feedback' },
-                      { key: 'emergencyAlerts', label: 'Emergency Service Requests' }
+                      { key: 'appointmentReminders' as const, label: 'Appointment Reminders' },
+                      { key: 'lowInventoryAlerts' as const, label: 'Low Inventory Alerts' },
+                      { key: 'customerFeedback' as const, label: 'Customer Feedback' },
+                      { key: 'emergencyAlerts' as const, label: 'Emergency Service Requests' }
                     ].map((item) => (
                       <div key={item.key} className="flex items-center justify-between">
                         <Label>{item.label}</Label>
                         <Switch
                           checked={notifications[item.key]}
-                          onCheckedChange={(checked) => setNotifications({ ...notifications, [item.key]: checked })}
+                          onCheckedChange={(checked) => handleNotificationChange(item.key, checked)}
                         />
                       </div>
                     ))}
@@ -431,15 +431,15 @@ export function SettingsView() {
                   <h4 className="font-medium">Reports</h4>
                   <div className="space-y-3">
                     {[
-                      { key: 'dailyReports', label: 'Daily Summary Reports' },
-                      { key: 'weeklyReports', label: 'Weekly Performance Reports' },
-                      { key: 'monthlyReports', label: 'Monthly Business Reports' }
+                      { key: 'dailyReports' as const, label: 'Daily Summary Reports' },
+                      { key: 'weeklyReports' as const, label: 'Weekly Performance Reports' },
+                      { key: 'monthlyReports' as const, label: 'Monthly Business Reports' }
                     ].map((item) => (
                       <div key={item.key} className="flex items-center justify-between">
                         <Label>{item.label}</Label>
                         <Switch
                           checked={notifications[item.key]}
-                          onCheckedChange={(checked) => setNotifications({ ...notifications, [item.key]: checked })}
+                          onCheckedChange={(checked) => handleNotificationChange(item.key, checked)}
                         />
                       </div>
                     ))}

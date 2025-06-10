@@ -1,10 +1,7 @@
 import { cn } from '@/lib/utils';
 import { NavLink } from 'react-router-dom';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { GanttChartSquare, PieChart, CalendarClock, Users, HardHat as UserHardHat, PackageOpen, Settings, LogOut, Menu } from 'lucide-react';
+import { GanttChartSquare, PieChart, CalendarClock, Users, HardHat as UserHardHat, PackageOpen, Settings, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -89,23 +86,5 @@ function NavItem({ to, icon, children }: NavItemProps) {
       {icon}
       <span>{children}</span>
     </NavLink>
-  );
-}
-
-export function MobileSidebar() {
-  const [open, setOpen] = useState(false);
-  
-  return (
-    <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="md:hidden">
-          <Menu className="h-5 w-5" />
-          <span className="sr-only">Toggle menu</span>
-        </Button>
-      </SheetTrigger>
-      <SheetContent side="left" className="p-0">
-        <Sidebar />
-      </SheetContent>
-    </Sheet>
   );
 }

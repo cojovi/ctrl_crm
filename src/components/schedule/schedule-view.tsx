@@ -29,7 +29,7 @@ interface Appointment {
 export function ScheduleView() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [openDialog, setOpenDialog] = useState(false);
-  const [appointments, setAppointments] = useState<Appointment[]>(mockAppointments);
+  const [appointments] = useState<Appointment[]>(mockAppointments);
   const [selectedTechnicians, setSelectedTechnicians] = useState<string[]>([]);
 
   const startDate = startOfWeek(selectedDate, { weekStartsOn: 1 });

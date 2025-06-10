@@ -17,8 +17,7 @@ import {
   MapPin, 
   Calendar, 
   DollarSign,
-  History,
-  UserPlus
+  History
 } from 'lucide-react';
 import { format } from 'date-fns';
 

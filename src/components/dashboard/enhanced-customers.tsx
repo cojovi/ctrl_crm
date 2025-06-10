@@ -16,8 +16,7 @@ import {
   History,
   Settings,
   Search,
-  UserPlus,
-  Filter
+  UserPlus
 } from 'lucide-react';
 import { format } from 'date-fns';
 

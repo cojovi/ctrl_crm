@@ -1,6 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Badge } from '@/components/ui/badge';
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend, PieChart, Pie, Cell } from 'recharts';
 import { TrendingUp, TrendingDown, Clock, Star, DollarSign, CheckCircle } from 'lucide-react';
 
@@ -178,7 +177,7 @@ export function AnalyticsTab() {
                       fill="#8884d8"
                       dataKey="value"
                     >
-                      {serviceTypeData.map((entry, index) => (
+                      {serviceTypeData.map((_, index) => (
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Pie>

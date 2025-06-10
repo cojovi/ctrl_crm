@@ -9,7 +9,6 @@ import {
   Calendar, 
   MessageSquare, 
   AlertTriangle, 
-  Users, 
   Server, 
   Settings,
   Clock,

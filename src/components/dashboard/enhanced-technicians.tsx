@@ -11,14 +11,11 @@ import {
   Phone, 
   Mail, 
   Calendar, 
-  Star, 
-  Award,
+  Star,
   Users,
   Search,
-  Filter,
   UserPlus
 } from 'lucide-react';
-import { cn } from '@/lib/utils';
 
 interface Technician {
   id: string;
