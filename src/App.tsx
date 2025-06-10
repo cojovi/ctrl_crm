@@ -10,6 +10,8 @@ import { AuthProvider } from './components/auth/auth-provider';
 import { LoginForm } from './components/auth/login-form';
 import { TechnicianView } from './components/technicians/technician-view';
 import { SettingsView } from './components/settings/settings-view';
+import { AccountPage } from './components/pages/account-page';
+import { ProfilePage } from './components/pages/profile-page';
 import { ProtectedRoute } from './components/auth/protected-route';
 
 function App() {
@@ -64,6 +66,22 @@ function App() {
               element={
                 <ProtectedRoute>
                   <TechnicianView />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/account"
+              element={
+                <ProtectedRoute>
+                  <AccountPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <ProfilePage />
                 </ProtectedRoute>
               }
             />

@@ -4,7 +4,12 @@ import { supabase } from '@/lib/supabase';
 type User = {
   id: string;
   email: string;
+  firstName: string;
+  lastName: string;
   role: string;
+  avatar?: string;
+  phone?: string;
+  joinDate?: string;
 };
 
 type AuthContextType = {
@@ -12,6 +17,7 @@ type AuthContextType = {
   loading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
+  updateUser: (userData: Partial<User>) => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -27,11 +33,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const { data: { session } } = await supabase.auth.getSession();
         
         if (session) {
-          // In a real app, we would fetch user role from a database
+          // In a real app, we would fetch user profile from a database
+          // For demo purposes, extracting name from email or using defaults
+          const email = session.user.email!;
+          const nameParts = email.split('@')[0].split('.');
+          const firstName = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1) : 'John';
+          const lastName = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() + nameParts[1].slice(1) : 'Doe';
+          
           setUser({
             id: session.user.id,
-            email: session.user.email!,
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
             role: 'admin',
+            joinDate: session.user.created_at,
+            phone: session.user.phone || '(555) 123-4567'
           });
         }
       } catch (error) {
@@ -47,10 +63,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_, session) => {
         if (session) {
+          const email = session.user.email!;
+          const nameParts = email.split('@')[0].split('.');
+          const firstName = nameParts[0] ? nameParts[0].charAt(0).toUpperCase() + nameParts[0].slice(1) : 'John';
+          const lastName = nameParts[1] ? nameParts[1].charAt(0).toUpperCase() + nameParts[1].slice(1) : 'Doe';
+          
           setUser({
             id: session.user.id,
-            email: session.user.email!,
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
             role: 'admin',
+            joinDate: session.user.created_at,
+            phone: session.user.phone || '(555) 123-4567'
           });
         } else {
           setUser(null);
@@ -81,8 +106,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = async () => {
     try {
       await supabase.auth.signOut();
+      setUser(null);
     } catch (error) {
       console.error('Error signing out:', error);
+      throw error;
+    }
+  };
+
+  const updateUser = async (userData: Partial<User>) => {
+    try {
+      if (user) {
+        const updatedUser = { ...user, ...userData };
+        setUser(updatedUser);
+        // In a real app, this would update the database
+        console.log('User updated:', updatedUser);
+      }
+    } catch (error) {
+      console.error('Error updating user:', error);
       throw error;
     }
   };
@@ -92,6 +132,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     loading,
     signIn,
     signOut,
+    updateUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
