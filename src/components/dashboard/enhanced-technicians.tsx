@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { AddTechnicianForm } from '@/components/forms/add-technician-form';
 import { 
   MapPin, 
   Phone, 
@@ -18,6 +17,7 @@ import {
   UserPlus
 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { AddTechnicianForm } from '@/components/forms/add-technician-form';
 
 interface Technician {
   id: string;
@@ -170,9 +170,23 @@ export function EnhancedTechnicians() {
   });
 
   const handleAddTechnician = (newTechnician: any) => {
-    setTechnicians(prev => [...prev, newTechnician]);
+    const technicianWithDefaults = {
+      ...newTechnician,
+      id: `tech-${Date.now()}`,
+      status: 'Available' as const,
+      rating: 0,
+      completedJobs: 0,
+      location: null,
+      joinDate: new Date().toISOString(),
+      skills: newTechnician.skills || [],
+      certifications: newTechnician.certifications || [],
+      specialties: newTechnician.skills || []
+    };
+    
+    setTechnicians(prev => [...prev, technicianWithDefaults]);
+    
     toast({
-      title: 'Technician Added',
+      title: 'Technician Added Successfully',
       description: `${newTechnician.name} has been added to the team.`,
     });
   };
@@ -421,6 +435,7 @@ export function EnhancedTechnicians() {
         </CardContent>
       </Card>
 
+      {/* Add Technician Modal */}
       <AddTechnicianForm
         open={addTechnicianModalOpen}
         onOpenChange={setAddTechnicianModalOpen}

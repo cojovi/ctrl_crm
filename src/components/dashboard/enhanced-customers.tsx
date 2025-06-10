@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { AddCustomerForm } from '@/components/forms/add-customer-form';
 import { 
   User, 
   Phone, 
@@ -21,6 +20,7 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { useToast } from '@/hooks/use-toast';
+import { AddCustomerForm } from '@/components/forms/add-customer-form';
 
 interface Customer {
   id: string;
@@ -202,9 +202,22 @@ export function EnhancedCustomers() {
   });
 
   const handleAddCustomer = (newCustomer: any) => {
-    setCustomers(prev => [...prev, newCustomer]);
+    const customerWithId = {
+      ...newCustomer,
+      id: `cust-${Date.now()}`,
+      serviceHistory: [],
+      equipment: [],
+      totalSpent: 0,
+      lastService: '',
+      customerSince: '0 days',
+      joinDate: new Date().toISOString(),
+      preferences: newCustomer.communicationPreferences || []
+    };
+    
+    setCustomers(prev => [...prev, customerWithId]);
+    
     toast({
-      title: 'Customer Added',
+      title: 'Customer Added Successfully',
       description: `${newCustomer.name} has been added to your customer database.`,
     });
   };
@@ -410,9 +423,13 @@ export function EnhancedCustomers() {
                   
                   <TableCell>
                     <div className="space-y-1">
-                      <div className="text-sm">
-                        {format(new Date(customer.lastService), 'MMM d, yyyy')}
-                      </div>
+                      {customer.lastService ? (
+                        <div className="text-sm">
+                          {format(new Date(customer.lastService), 'MMM d, yyyy')}
+                        </div>
+                      ) : (
+                        <div className="text-sm text-muted-foreground">No service yet</div>
+                      )}
                       {customer.nextMaintenance && (
                         <div className="flex items-center gap-1 text-xs text-muted-foreground">
                           <Calendar className="h-3 w-3" />
@@ -450,6 +467,7 @@ export function EnhancedCustomers() {
         </CardContent>
       </Card>
 
+      {/* Add Customer Modal */}
       <AddCustomerForm
         open={addCustomerModalOpen}
         onOpenChange={setAddCustomerModalOpen}

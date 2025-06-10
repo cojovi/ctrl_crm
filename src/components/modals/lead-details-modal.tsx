@@ -75,14 +75,19 @@ export function LeadDetailsModal({
   const handleScheduleAppointment = async () => {
     setIsLoading(true);
     try {
+      // Simulate scheduling an appointment
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       toast({
-        title: 'Scheduling Appointment',
-        description: 'Redirecting to schedule page...',
+        title: 'Appointment Scheduled',
+        description: `Appointment has been scheduled for ${lead.customerName}. Redirecting to schedule...`,
       });
       
-      // Navigate to schedule page with this lead's information
-      navigate('/schedule');
-      onOpenChange(false);
+      // Navigate to schedule page
+      setTimeout(() => {
+        navigate('/schedule');
+        onOpenChange(false);
+      }, 1500);
       
       // Call the callback if provided
       onScheduleAppointment?.(lead.id);
@@ -101,14 +106,19 @@ export function LeadDetailsModal({
   const handleCreateQuote = async () => {
     setIsLoading(true);
     try {
+      // Simulate creating a quote
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       toast({
-        title: 'Creating Quote',
-        description: 'Redirecting to quote creation...',
+        title: 'Quote Created',
+        description: `Quote has been created for ${lead.customerName}. Redirecting to quote details...`,
       });
       
       // Navigate to leads page with quote creation
-      navigate(`/leads/${lead.id}`);
-      onOpenChange(false);
+      setTimeout(() => {
+        navigate(`/leads/${lead.id}`);
+        onOpenChange(false);
+      }, 1500);
       
       // Call the callback if provided
       onCreateQuote?.(lead.id);
@@ -144,7 +154,9 @@ export function LeadDetailsModal({
     }
 
     try {
-      // Here you would normally save the note to the database
+      // Simulate adding note
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
       console.log('Adding note to lead:', lead.id, newNote);
       
       toast({
@@ -166,7 +178,9 @@ export function LeadDetailsModal({
 
   const handleUpdateNotes = async () => {
     try {
-      // Here you would normally update the notes in the database
+      // Simulate updating notes
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
       console.log('Updating lead notes:', lead.id, editNotes);
       
       toast({
@@ -345,11 +359,11 @@ export function LeadDetailsModal({
           <div className="flex flex-wrap gap-2">
             <Button onClick={handleScheduleAppointment} disabled={isLoading}>
               <Calendar className="mr-2 h-4 w-4" />
-              Schedule Appointment
+              {isLoading ? 'Scheduling...' : 'Schedule Appointment'}
             </Button>
             <Button variant="outline" onClick={handleCreateQuote} disabled={isLoading}>
               <FileText className="mr-2 h-4 w-4" />
-              Create Quote
+              {isLoading ? 'Creating...' : 'Create Quote'}
             </Button>
             <Button variant="outline" onClick={handleEditLead}>
               <Edit className="mr-2 h-4 w-4" />

@@ -245,7 +245,7 @@ function AppointmentCard({
   );
 }
 
-// Updated mock appointments with current week dates (June 2025)
+// Updated mock appointments with current week dates (December 2024)
 const mockAppointments: Appointment[] = [
   {
     id: '1',
@@ -257,8 +257,8 @@ const mockAppointments: Appointment[] = [
     status: 'Confirmed',
     technicianId: 'tech-1',
     technician: 'Alex Rodriguez',
-    start: new Date(2025, 5, 10, 9, 0), // June 10, 2025 9:00 AM (Tuesday)
-    end: new Date(2025, 5, 10, 11, 0),
+    start: new Date(2024, 11, 9, 9, 0), // December 9, 2024 9:00 AM (Monday)
+    end: new Date(2024, 11, 9, 11, 0),
     estimatedCost: 1200,
     notes: 'Customer prefers white sectional door with windows.'
   },
@@ -272,8 +272,8 @@ const mockAppointments: Appointment[] = [
     status: 'In Progress',
     technicianId: 'tech-2',
     technician: 'Carlos Mendez',
-    start: new Date(2025, 5, 11, 13, 0), // June 11, 2025 1:00 PM (Wednesday)
-    end: new Date(2025, 5, 11, 15, 0),
+    start: new Date(2024, 11, 10, 13, 0), // December 10, 2024 1:00 PM (Tuesday)
+    end: new Date(2024, 11, 10, 15, 0),
     estimatedCost: 350,
     notes: 'Spring replacement needed. Customer has dogs.'
   },
@@ -287,8 +287,8 @@ const mockAppointments: Appointment[] = [
     status: 'Completed',
     technicianId: 'tech-1',
     technician: 'Alex Rodriguez',
-    start: new Date(2025, 5, 12, 10, 0), // June 12, 2025 10:00 AM (Thursday)
-    end: new Date(2025, 5, 12, 11, 0),
+    start: new Date(2024, 11, 11, 10, 0), // December 11, 2024 10:00 AM (Wednesday)
+    end: new Date(2024, 11, 11, 11, 0),
     estimatedCost: 150,
     notes: 'Annual maintenance inspection.'
   },
@@ -302,8 +302,8 @@ const mockAppointments: Appointment[] = [
     status: 'Cancelled',
     technicianId: 'tech-3',
     technician: 'Jessica Taylor',
-    start: new Date(2025, 5, 13, 14, 0), // June 13, 2025 2:00 PM (Friday)
-    end: new Date(2025, 5, 13, 16, 0),
+    start: new Date(2024, 11, 12, 14, 0), // December 12, 2024 2:00 PM (Thursday)
+    end: new Date(2024, 11, 12, 16, 0),
     estimatedCost: 1500,
     notes: 'Customer rescheduled due to weather concerns.'
   },
@@ -317,8 +317,8 @@ const mockAppointments: Appointment[] = [
     status: 'Confirmed',
     technicianId: 'tech-2',
     technician: 'Carlos Mendez',
-    start: new Date(2025, 5, 14, 9, 0), // June 14, 2025 9:00 AM (Saturday)
-    end: new Date(2025, 5, 14, 10, 30),
+    start: new Date(2024, 11, 13, 9, 0), // December 13, 2024 9:00 AM (Friday)
+    end: new Date(2024, 11, 13, 10, 30),
     estimatedCost: 285,
     notes: 'Opener repair - remote not working.'
   },
@@ -332,9 +332,24 @@ const mockAppointments: Appointment[] = [
     status: 'Confirmed',
     technicianId: 'tech-3',
     technician: 'Jessica Taylor',
-    start: new Date(2025, 5, 9, 14, 0), // June 9, 2025 2:00 PM (Monday)
-    end: new Date(2025, 5, 9, 15, 30),
+    start: new Date(2024, 11, 14, 14, 0), // December 14, 2024 2:00 PM (Saturday)
+    end: new Date(2024, 11, 14, 15, 30),
     estimatedCost: 150,
     notes: 'Quarterly maintenance check for VIP customer.'
+  },
+  {
+    id: '7',
+    customerName: 'Robert Wilson',
+    customerEmail: 'robert.wilson@email.com',
+    customerPhone: '(555) 789-0123',
+    serviceType: 'Emergency Repair',
+    location: '654 Pine Avenue, Oakland, CA',
+    status: 'Confirmed',
+    technicianId: 'tech-1',
+    technician: 'Alex Rodriguez',
+    start: new Date(2024, 11, 15, 11, 0), // December 15, 2024 11:00 AM (Sunday)
+    end: new Date(2024, 11, 15, 12, 30),
+    estimatedCost: 425,
+    notes: 'Emergency call - garage door completely stuck.'
   }
 ];
