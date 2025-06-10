@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Textarea } from '@/components/ui/textarea';
 import { 
   User, 
   Mail, 
@@ -16,6 +18,7 @@ import {
   MessageSquare
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useToast } from '@/hooks/use-toast';
 
 interface Lead {
   id: string;
@@ -48,7 +51,13 @@ export function LeadDetailsModal({
   onScheduleAppointment,
   onCreateQuote 
 }: LeadDetailsModalProps) {
+  const { toast } = useToast();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editNotes, setEditNotes] = useState('');
+  const [showAddNote, setShowAddNote] = useState(false);
+  const [newNote, setNewNote] = useState('');
 
   if (!lead) return null;
 
@@ -66,9 +75,24 @@ export function LeadDetailsModal({
   const handleScheduleAppointment = async () => {
     setIsLoading(true);
     try {
+      toast({
+        title: 'Scheduling Appointment',
+        description: 'Redirecting to schedule page...',
+      });
+      
+      // Navigate to schedule page with this lead's information
+      navigate('/schedule');
+      onOpenChange(false);
+      
+      // Call the callback if provided
       onScheduleAppointment?.(lead.id);
     } catch (error) {
       console.error('Error scheduling appointment:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to schedule appointment. Please try again.',
+        variant: 'destructive',
+      });
     } finally {
       setIsLoading(false);
     }
@@ -77,11 +101,87 @@ export function LeadDetailsModal({
   const handleCreateQuote = async () => {
     setIsLoading(true);
     try {
+      toast({
+        title: 'Creating Quote',
+        description: 'Redirecting to quote creation...',
+      });
+      
+      // Navigate to leads page with quote creation
+      navigate(`/leads/${lead.id}`);
+      onOpenChange(false);
+      
+      // Call the callback if provided
       onCreateQuote?.(lead.id);
     } catch (error) {
       console.error('Error creating quote:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to create quote. Please try again.',
+        variant: 'destructive',
+      });
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleEditLead = () => {
+    toast({
+      title: 'Edit Lead',
+      description: 'Redirecting to lead editing page...',
+    });
+    navigate(`/leads/${lead.id}`);
+    onOpenChange(false);
+  };
+
+  const handleAddNote = async () => {
+    if (!newNote.trim()) {
+      toast({
+        title: 'Validation Error',
+        description: 'Please enter a note.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    try {
+      // Here you would normally save the note to the database
+      console.log('Adding note to lead:', lead.id, newNote);
+      
+      toast({
+        title: 'Note Added',
+        description: 'Your note has been added to the lead.',
+      });
+      
+      setNewNote('');
+      setShowAddNote(false);
+    } catch (error) {
+      console.error('Error adding note:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to add note. Please try again.',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const handleUpdateNotes = async () => {
+    try {
+      // Here you would normally update the notes in the database
+      console.log('Updating lead notes:', lead.id, editNotes);
+      
+      toast({
+        title: 'Notes Updated',
+        description: 'Lead notes have been updated successfully.',
+      });
+      
+      setIsEditMode(false);
+    } catch (error) {
+      console.error('Error updating notes:', error);
+      toast({
+        title: 'Error',
+        description: 'Failed to update notes. Please try again.',
+        variant: 'destructive',
+      });
     }
   };
 
@@ -163,12 +263,78 @@ export function LeadDetailsModal({
                 </div>
               </div>
               
-              {lead.notes && (
+              {(lead.notes || isEditMode || showAddNote) && (
                 <>
                   <Separator className="my-4" />
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-2">Notes</p>
-                    <p className="text-sm">{lead.notes}</p>
+                    <div className="flex items-center justify-between mb-2">
+                      <p className="text-sm font-medium text-muted-foreground">Notes</p>
+                      {!isEditMode && !showAddNote && (
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => {
+                            setEditNotes(lead.notes || '');
+                            setIsEditMode(true);
+                          }}
+                        >
+                          <Edit className="h-3 w-3 mr-1" />
+                          Edit
+                        </Button>
+                      )}
+                    </div>
+                    
+                    {isEditMode ? (
+                      <div className="space-y-2">
+                        <Textarea
+                          value={editNotes}
+                          onChange={(e) => setEditNotes(e.target.value)}
+                          placeholder="Enter notes about this lead..."
+                          className="h-24 resize-none"
+                        />
+                        <div className="flex gap-2">
+                          <Button size="sm" onClick={handleUpdateNotes}>
+                            Save
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
+                              setIsEditMode(false);
+                              setEditNotes('');
+                            }}
+                          >
+                            Cancel
+                          </Button>
+                        </div>
+                      </div>
+                    ) : showAddNote ? (
+                      <div className="space-y-2">
+                        <Textarea
+                          value={newNote}
+                          onChange={(e) => setNewNote(e.target.value)}
+                          placeholder="Add a new note..."
+                          className="h-24 resize-none"
+                        />
+                        <div className="flex gap-2">
+                          <Button size="sm" onClick={handleAddNote}>
+                            Add Note
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
+                              setShowAddNote(false);
+                              setNewNote('');
+                            }}
+                          >
+                            Cancel
+                          </Button>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-sm">{lead.notes || 'No notes available'}</p>
+                    )}
                   </div>
                 </>
               )}
@@ -185,14 +351,16 @@ export function LeadDetailsModal({
               <FileText className="mr-2 h-4 w-4" />
               Create Quote
             </Button>
-            <Button variant="outline">
+            <Button variant="outline" onClick={handleEditLead}>
               <Edit className="mr-2 h-4 w-4" />
               Edit Lead
             </Button>
-            <Button variant="outline">
-              <MessageSquare className="mr-2 h-4 w-4" />
-              Add Note
-            </Button>
+            {!showAddNote && !isEditMode && (
+              <Button variant="outline" onClick={() => setShowAddNote(true)}>
+                <MessageSquare className="mr-2 h-4 w-4" />
+                Add Note
+              </Button>
+            )}
           </div>
         </div>
       </DialogContent>

@@ -245,6 +245,7 @@ function AppointmentCard({
   );
 }
 
+// Updated mock appointments with current week dates (June 2025)
 const mockAppointments: Appointment[] = [
   {
     id: '1',
@@ -256,8 +257,8 @@ const mockAppointments: Appointment[] = [
     status: 'Confirmed',
     technicianId: 'tech-1',
     technician: 'Alex Rodriguez',
-    start: new Date(2025, 0, 20, 9, 0), // January 20, 2025 9:00 AM
-    end: new Date(2025, 0, 20, 11, 0),
+    start: new Date(2025, 5, 10, 9, 0), // June 10, 2025 9:00 AM (Tuesday)
+    end: new Date(2025, 5, 10, 11, 0),
     estimatedCost: 1200,
     notes: 'Customer prefers white sectional door with windows.'
   },
@@ -271,8 +272,8 @@ const mockAppointments: Appointment[] = [
     status: 'In Progress',
     technicianId: 'tech-2',
     technician: 'Carlos Mendez',
-    start: new Date(2025, 0, 21, 13, 0), // January 21, 2025 1:00 PM
-    end: new Date(2025, 0, 21, 15, 0),
+    start: new Date(2025, 5, 11, 13, 0), // June 11, 2025 1:00 PM (Wednesday)
+    end: new Date(2025, 5, 11, 15, 0),
     estimatedCost: 350,
     notes: 'Spring replacement needed. Customer has dogs.'
   },
@@ -286,8 +287,8 @@ const mockAppointments: Appointment[] = [
     status: 'Completed',
     technicianId: 'tech-1',
     technician: 'Alex Rodriguez',
-    start: new Date(2025, 0, 22, 10, 0), // January 22, 2025 10:00 AM
-    end: new Date(2025, 0, 22, 11, 0),
+    start: new Date(2025, 5, 12, 10, 0), // June 12, 2025 10:00 AM (Thursday)
+    end: new Date(2025, 5, 12, 11, 0),
     estimatedCost: 150,
     notes: 'Annual maintenance inspection.'
   },
@@ -301,8 +302,8 @@ const mockAppointments: Appointment[] = [
     status: 'Cancelled',
     technicianId: 'tech-3',
     technician: 'Jessica Taylor',
-    start: new Date(2025, 0, 23, 14, 0), // January 23, 2025 2:00 PM
-    end: new Date(2025, 0, 23, 16, 0),
+    start: new Date(2025, 5, 13, 14, 0), // June 13, 2025 2:00 PM (Friday)
+    end: new Date(2025, 5, 13, 16, 0),
     estimatedCost: 1500,
     notes: 'Customer rescheduled due to weather concerns.'
   },
@@ -314,11 +315,26 @@ const mockAppointments: Appointment[] = [
     serviceType: 'Repair',
     location: '202 Elm St, Somewhere, CA',
     status: 'Confirmed',
-    technicianId: '2',
+    technicianId: 'tech-2',
     technician: 'Carlos Mendez',
-    start: new Date(2025, 0, 24, 9, 0), // January 24, 2025 9:00 AM
-    end: new Date(2025, 0, 24, 10, 30),
+    start: new Date(2025, 5, 14, 9, 0), // June 14, 2025 9:00 AM (Saturday)
+    end: new Date(2025, 5, 14, 10, 30),
     estimatedCost: 285,
     notes: 'Opener repair - remote not working.'
   },
+  {
+    id: '6',
+    customerName: 'Lisa Anderson',
+    customerEmail: 'lisa.anderson@email.com',
+    customerPhone: '(555) 678-9012',
+    serviceType: 'Maintenance',
+    location: '987 Maple Drive, Fremont, CA',
+    status: 'Confirmed',
+    technicianId: 'tech-3',
+    technician: 'Jessica Taylor',
+    start: new Date(2025, 5, 9, 14, 0), // June 9, 2025 2:00 PM (Monday)
+    end: new Date(2025, 5, 9, 15, 30),
+    estimatedCost: 150,
+    notes: 'Quarterly maintenance check for VIP customer.'
+  }
 ];
