@@ -17,30 +17,15 @@ import { TechnicianFilter } from './technician-filter';
 import { AppointmentDetailsModal } from '@/components/modals/appointment-details-modal';
 import { RescheduleModal } from '@/components/modals/reschedule-modal';
 import { useToast } from '@/hooks/use-toast';
-
-interface Appointment {
-  id: string;
-  customerName: string;
-  customerEmail?: string;
-  customerPhone?: string;
-  serviceType: string;
-  location: string;
-  status: string;
-  technicianId: string;
-  technician: string;
-  start: Date;
-  end: Date;
-  notes?: string;
-  estimatedCost?: number;
-}
+import type { ScheduleAppointment, UpcomingAppointment } from '@/types/appointments';
 
 export function ScheduleView() {
   const { toast } = useToast();
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [openDialog, setOpenDialog] = useState(false);
-  const [appointments] = useState<Appointment[]>(mockAppointments);
+  const [appointments] = useState<ScheduleAppointment[]>(mockAppointments);
   const [selectedTechnicians, setSelectedTechnicians] = useState<string[]>([]);
-  const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
+  const [selectedAppointment, setSelectedAppointment] = useState<UpcomingAppointment | null>(null);
   const [detailsModalOpen, setDetailsModalOpen] = useState(false);
   const [rescheduleModalOpen, setRescheduleModalOpen] = useState(false);
   const [rescheduleAppointmentId, setRescheduleAppointmentId] = useState<string>('');
@@ -64,8 +49,25 @@ export function ScheduleView() {
     setSelectedTechnicians(technicianIds);
   };
 
-  const handleAppointmentClick = (appointment: Appointment) => {
-    setSelectedAppointment(appointment);
+  const handleAppointmentClick = (appointment: ScheduleAppointment) => {
+    // Convert ScheduleAppointment to UpcomingAppointment format for the modal
+    const upcomingAppointment: UpcomingAppointment = {
+      id: appointment.id,
+      customerName: appointment.customerName,
+      customerEmail: appointment.customerEmail,
+      customerPhone: appointment.customerPhone,
+      serviceType: appointment.serviceType,
+      location: appointment.location,
+      status: appointment.status,
+      technician: appointment.technician,
+      date: format(appointment.start, 'MMMM d, yyyy'),
+      time: `${format(appointment.start, 'h:mm a')} - ${format(appointment.end, 'h:mm a')}`,
+      duration: `${Math.round((appointment.end.getTime() - appointment.start.getTime()) / (1000 * 60))} minutes`,
+      notes: appointment.notes,
+      estimatedCost: appointment.estimatedCost
+    };
+    
+    setSelectedAppointment(upcomingAppointment);
     setDetailsModalOpen(true);
   };
 
@@ -220,7 +222,7 @@ function AppointmentCard({
   appointment, 
   onClick 
 }: { 
-  appointment: Appointment;
+  appointment: ScheduleAppointment;
   onClick: () => void;
 }) {
   return (
@@ -248,7 +250,7 @@ function AppointmentCard({
 }
 
 // Comprehensive mock appointments for June 9-15, 2025 (current week shown in calendar)
-const mockAppointments: Appointment[] = [
+const mockAppointments: ScheduleAppointment[] = [
   // MONDAY - June 9, 2025
   {
     id: '1',

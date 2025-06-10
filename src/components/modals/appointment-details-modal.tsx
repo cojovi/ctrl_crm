@@ -18,25 +18,10 @@ import {
   X
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
-interface Appointment {
-  id: string;
-  customerName: string;
-  customerEmail?: string;
-  customerPhone?: string;
-  serviceType: string;
-  location: string;
-  status: string;
-  technician: string;
-  date: string;
-  time: string;
-  duration?: string;
-  notes?: string;
-  estimatedCost?: number;
-}
+import type { UpcomingAppointment } from '@/types/appointments';
 
 interface AppointmentDetailsModalProps {
-  appointment: Appointment | null;
+  appointment: UpcomingAppointment | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onReschedule?: (appointmentId: string) => void;

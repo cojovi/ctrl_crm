@@ -5,31 +5,16 @@ import { Button } from '@/components/ui/button';
 import { AppointmentDetailsModal } from '@/components/modals/appointment-details-modal';
 import { RescheduleModal } from '@/components/modals/reschedule-modal';
 import { useToast } from '@/hooks/use-toast';
-
-interface Appointment {
-  id: string;
-  customerName: string;
-  customerEmail?: string;
-  customerPhone?: string;
-  serviceType: string;
-  location: string;
-  status: string;
-  technician: string;
-  date: string;
-  time: string;
-  duration?: string;
-  notes?: string;
-  estimatedCost?: number;
-}
+import type { UpcomingAppointment } from '@/types/appointments';
 
 export function UpcomingAppointments() {
   const { toast } = useToast();
-  const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
+  const [selectedAppointment, setSelectedAppointment] = useState<UpcomingAppointment | null>(null);
   const [detailsModalOpen, setDetailsModalOpen] = useState(false);
   const [rescheduleModalOpen, setRescheduleModalOpen] = useState(false);
   const [rescheduleAppointmentId, setRescheduleAppointmentId] = useState<string>('');
 
-  const handleViewDetails = (appointment: Appointment) => {
+  const handleViewDetails = (appointment: UpcomingAppointment) => {
     setSelectedAppointment(appointment);
     setDetailsModalOpen(true);
   };
@@ -157,7 +142,7 @@ function Badge({ status }: { status: string }) {
   );
 }
 
-const appointments: Appointment[] = [
+const appointments: UpcomingAppointment[] = [
   {
     id: '1',
     customerName: 'Michael Johnson',

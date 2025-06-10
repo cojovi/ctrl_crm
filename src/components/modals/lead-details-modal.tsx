@@ -12,7 +12,6 @@ import {
   Phone, 
   MapPin, 
   Calendar, 
-  DollarSign,
   FileText,
   Edit,
   MessageSquare
