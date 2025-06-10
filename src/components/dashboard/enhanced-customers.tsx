@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { AddCustomerForm } from '@/components/forms/add-customer-form';
 import { 
   User, 
   Phone, 
@@ -19,6 +20,7 @@ import {
   UserPlus
 } from 'lucide-react';
 import { format } from 'date-fns';
+import { useToast } from '@/hooks/use-toast';
 
 interface Customer {
   id: string;
@@ -164,10 +166,12 @@ const mockCustomers: Customer[] = [
 ];
 
 export function EnhancedCustomers() {
-  const [customers] = useState<Customer[]>(mockCustomers);
+  const { toast } = useToast();
+  const [customers, setCustomers] = useState<Customer[]>(mockCustomers);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('name');
+  const [addCustomerModalOpen, setAddCustomerModalOpen] = useState(false);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -196,6 +200,14 @@ export function EnhancedCustomers() {
       default: return 0;
     }
   });
+
+  const handleAddCustomer = (newCustomer: any) => {
+    setCustomers(prev => [...prev, newCustomer]);
+    toast({
+      title: 'Customer Added',
+      description: `${newCustomer.name} has been added to your customer database.`,
+    });
+  };
 
   const totalCustomers = customers.length;
   const activeCustomers = customers.filter(c => c.status === 'Active').length;
@@ -262,7 +274,7 @@ export function EnhancedCustomers() {
               </CardTitle>
               <CardDescription>Manage customer profiles, service history, and preferences</CardDescription>
             </div>
-            <Button>
+            <Button onClick={() => setAddCustomerModalOpen(true)}>
               <UserPlus className="mr-2 h-4 w-4" />
               Add Customer
             </Button>
@@ -437,6 +449,12 @@ export function EnhancedCustomers() {
           )}
         </CardContent>
       </Card>
+
+      <AddCustomerForm
+        open={addCustomerModalOpen}
+        onOpenChange={setAddCustomerModalOpen}
+        onAddCustomer={handleAddCustomer}
+      />
     </div>
   );
 }

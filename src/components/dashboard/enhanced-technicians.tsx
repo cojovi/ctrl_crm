@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { AddTechnicianForm } from '@/components/forms/add-technician-form';
 import { 
   MapPin, 
   Phone, 
@@ -16,6 +17,7 @@ import {
   Search,
   UserPlus
 } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 interface Technician {
   id: string;
@@ -130,10 +132,12 @@ const mockTechnicians: Technician[] = [
 ];
 
 export function EnhancedTechnicians() {
-  const [technicians] = useState<Technician[]>(mockTechnicians);
+  const { toast } = useToast();
+  const [technicians, setTechnicians] = useState<Technician[]>(mockTechnicians);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [specialtyFilter, setSpecialtyFilter] = useState<string>('all');
+  const [addTechnicianModalOpen, setAddTechnicianModalOpen] = useState(false);
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -164,6 +168,14 @@ export function EnhancedTechnicians() {
     
     return matchesSearch && matchesStatus && matchesSpecialty;
   });
+
+  const handleAddTechnician = (newTechnician: any) => {
+    setTechnicians(prev => [...prev, newTechnician]);
+    toast({
+      title: 'Technician Added',
+      description: `${newTechnician.name} has been added to the team.`,
+    });
+  };
 
   const availableCount = technicians.filter(t => t.status === 'Available').length;
   const busyCount = technicians.filter(t => t.status === 'Busy').length;
@@ -229,7 +241,7 @@ export function EnhancedTechnicians() {
               </CardTitle>
               <CardDescription>Manage team members, skills, and availability</CardDescription>
             </div>
-            <Button>
+            <Button onClick={() => setAddTechnicianModalOpen(true)}>
               <UserPlus className="mr-2 h-4 w-4" />
               Add Technician
             </Button>
@@ -408,6 +420,12 @@ export function EnhancedTechnicians() {
           )}
         </CardContent>
       </Card>
+
+      <AddTechnicianForm
+        open={addTechnicianModalOpen}
+        onOpenChange={setAddTechnicianModalOpen}
+        onAddTechnician={handleAddTechnician}
+      />
     </div>
   );
 }
