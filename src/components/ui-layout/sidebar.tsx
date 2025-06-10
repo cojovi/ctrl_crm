@@ -1,8 +1,9 @@
 import { cn } from '@/lib/utils';
 import { NavLink } from 'react-router-dom';
-import { GanttChartSquare, PieChart, CalendarClock, Users, HardHat as UserHardHat, PackageOpen, Settings, LogOut } from 'lucide-react';
+import { GanttChartSquare, PieChart, CalendarClock, Users, HardHat as UserHardHat, PackageOpen, Settings, LogOut, Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -61,6 +62,26 @@ export function Sidebar({ className }: SidebarProps) {
         </Button>
       </div>
     </div>
+  );
+}
+
+export function MobileSidebar() {
+  return (
+    <Sheet>
+      <SheetTrigger asChild>
+        <Button
+          variant="outline"
+          size="icon"
+          className="shrink-0 md:hidden"
+        >
+          <Menu className="h-5 w-5" />
+          <span className="sr-only">Toggle navigation menu</span>
+        </Button>
+      </SheetTrigger>
+      <SheetContent side="left" className="flex flex-col p-0">
+        <Sidebar />
+      </SheetContent>
+    </Sheet>
   );
 }
 
