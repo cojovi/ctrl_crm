@@ -32,14 +32,14 @@ export function SettingsView() {
   const { toast } = useToast();
   const [showApiKey, setShowApiKey] = useState(false);
   const [companyInfo, setCompanyInfo] = useState({
-    name: 'Ctrl + Alt + Garage',
+    name: 'CMAConnect',
     address: '123 Service Drive',
     city: 'San Francisco',
     state: 'CA',
     zip: '94105',
     phone: '(555) 123-DOOR',
-    email: 'info@ctrlaltgarage.com',
-    website: 'www.ctrlaltgarage.com',
+    email: 'info@cmaconnect.com',
+    website: 'www.cmaconnect.com',
     taxId: '12-3456789'
   });
 
@@ -464,9 +464,9 @@ export function SettingsView() {
               <CardContent>
                 <div className="space-y-4">
                   {[
-                    { name: 'Admin User', email: 'admin@ctrlaltgarage.com', role: 'Administrator', status: 'Active' },
-                    { name: 'Sarah Manager', email: 'sarah@ctrlaltgarage.com', role: 'Manager', status: 'Active' },
-                    { name: 'John Dispatcher', email: 'john@ctrlaltgarage.com', role: 'Dispatcher', status: 'Active' }
+                    { name: 'Admin User', email: 'admin@cmaconnect.com', role: 'Administrator', status: 'Active' },
+                    { name: 'Sarah Manager', email: 'sarah@cmaconnect.com', role: 'Manager', status: 'Active' },
+                    { name: 'John Dispatcher', email: 'john@cmaconnect.com', role: 'Dispatcher', status: 'Active' }
                   ].map((user, index) => (
                     <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
                       <div>

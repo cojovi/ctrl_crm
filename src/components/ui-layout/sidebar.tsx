@@ -24,7 +24,7 @@ export function Sidebar({ className }: SidebarProps) {
         <div className="px-4 py-2">
           <h2 className="mb-2 flex items-center gap-2 px-2 text-xl font-semibold tracking-tight">
             <GanttChartSquare className="h-6 w-6 text-teal-500" />
-            <span className="text-teal-500">Ctrl + Alt + Garage</span>
+            <span className="text-teal-500">CMAConnect</span>
           </h2>
           <div className="space-y-1">
             <NavItem to="/dashboard" icon={<PieChart className="mr-2 h-4 w-4" />}>

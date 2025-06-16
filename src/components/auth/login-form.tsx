@@ -63,7 +63,7 @@ export function LoginForm() {
       <div className="mx-auto w-full max-w-md">
         <div className="flex flex-col items-center space-y-2 text-center">
           <GanttChartSquare className="h-10 w-10 text-teal-500" />
-          <h1 className="text-2xl font-bold">Ctrl + Alt + Garage</h1>
+          <h1 className="text-2xl font-bold">CMAConnect</h1>
           <p className="text-sm text-muted-foreground">
             Sign in to access your garage door service dashboard
           </p>
@@ -143,7 +143,7 @@ export function LoginForm() {
       </div>
       
       <div className="mt-10 text-center text-xs text-muted-foreground">
-        &copy; 2025 Ctrl + Alt + Garage. All rights reserved.
+        &copy; 2025 CMAConnect. All rights reserved.
       </div>
     </div>
   );
