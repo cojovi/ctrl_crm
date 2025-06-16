@@ -1,7 +1,7 @@
 import { Layout } from '../ui-layout/layout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Overview } from './overview';
-import { RecentLeads } from './recent-leads';
+import { RecentCustomers } from './recent-customers';
 import { UpcomingAppointments } from './upcoming-appointments';
 import { StatsCards } from './stats-cards';
 import { AnalyticsTab } from './analytics-tab';
@@ -39,11 +39,11 @@ export function Dashboard() {
             </div>
             <div className="col-span-3 space-y-4">
               <div className="bg-card rounded-lg border p-6">
-                <h3 className="text-lg font-semibold mb-4">Recent Leads</h3>
+                <h3 className="text-lg font-semibold mb-4">Recent Customers</h3>
                 <p className="text-sm text-muted-foreground mb-4">
-                  You have 12 new leads this week
+                  You have 6 active customer projects
                 </p>
-                <RecentLeads />
+                <RecentCustomers />
               </div>
             </div>
           </div>
