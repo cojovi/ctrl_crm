@@ -66,7 +66,7 @@ function Badge({ status }: { status: string }) {
 const appointments = [
   {
     id: '1',
-    serviceType: 'New Rood',
+    serviceType: 'New Roof',
     date: 'Today',
     time: '9:00 AM - 11:00 AM',
     customer: 'Grand Homes',
@@ -76,7 +76,7 @@ const appointments = [
   },
   {
     id: '2',
-    serviceType: 'New Rood',
+    serviceType: 'New Roof',
     date: 'Today',
     time: '1:00 PM - 3:00 PM',
     customer: 'First Texas Homes',
@@ -86,7 +86,7 @@ const appointments = [
   },
   {
     id: '3',
-    serviceType: 'New Rood',
+    serviceType: 'New Roof',
     date: 'Tomorrow',
     time: '10:00 AM - 12:00 PM',
     customer: 'Dunhill Homes',
@@ -96,7 +96,7 @@ const appointments = [
   },
   {
     id: '4',
-    serviceType: 'New Rood',
+    serviceType: 'New Roof',
     date: 'Tomorrow',
     time: '2:00 PM - 4:00 PM',
     customer: 'David Weekley Homes',
