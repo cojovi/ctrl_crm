@@ -16,6 +16,7 @@ import {
   X
 } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
+import { notifications as demoNotifications } from '@/data/demo';
 
 interface Notification {
   id: string;
@@ -28,91 +29,8 @@ interface Notification {
   actionRequired: boolean;
 }
 
-const mockNotifications: Notification[] = [
-  {
-    id: '1',
-    type: 'emergency',
-    priority: 'high',
-    title: 'Emergency Service Request',
-    message: 'Urgent garage door malfunction at 123 Oak Street. Customer reports door stuck halfway open.',
-    timestamp: new Date(Date.now() - 15 * 60 * 1000),
-    read: false,
-    actionRequired: true
-  },
-  {
-    id: '2',
-    type: 'maintenance',
-    priority: 'medium',
-    title: 'Scheduled Maintenance Due',
-    message: 'Hydraulic lift #2 is due for quarterly maintenance. Schedule within next 7 days.',
-    timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000),
-    read: false,
-    actionRequired: true
-  },
-  {
-    id: '3',
-    type: 'feedback',
-    priority: 'low',
-    title: 'New Customer Review',
-    message: 'Sarah Johnson left a 5-star review: "Excellent service, very professional team!"',
-    timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000),
-    read: true,
-    actionRequired: false
-  },
-  {
-    id: '4',
-    type: 'schedule',
-    priority: 'medium',
-    title: 'Schedule Update',
-    message: 'Alex Rodriguez has updated availability for tomorrow. 3 appointments affected.',
-    timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000),
-    read: false,
-    actionRequired: true
-  },
-  {
-    id: '5',
-    type: 'system',
-    priority: 'low',
-    title: 'System Backup Complete',
-    message: 'Daily system backup completed successfully. All data secured.',
-    timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000),
-    read: true,
-    actionRequired: false
-  },
-  {
-    id: '6',
-    type: 'feedback',
-    priority: 'medium',
-    title: 'Customer Complaint',
-    message: 'Michael Brown reported delayed service. Response time exceeded SLA.',
-    timestamp: new Date(Date.now() - 8 * 60 * 60 * 1000),
-    read: false,
-    actionRequired: true
-  },
-  {
-    id: '7',
-    type: 'maintenance',
-    priority: 'high',
-    title: 'Equipment Failure Alert',
-    message: 'Diagnostic scanner #3 showing error codes. Immediate attention required.',
-    timestamp: new Date(Date.now() - 12 * 60 * 60 * 1000),
-    read: false,
-    actionRequired: true
-  },
-  {
-    id: '8',
-    type: 'schedule',
-    priority: 'low',
-    title: 'Weekly Schedule Reminder',
-    message: 'Next week\'s schedule has been published. Review assignments for accuracy.',
-    timestamp: new Date(Date.now() - 24 * 60 * 60 * 1000),
-    read: true,
-    actionRequired: false
-  }
-];
-
 export function NotificationsTab() {
-  const [notifications, setNotifications] = useState<Notification[]>(mockNotifications);
+  const [notifications, setNotifications] = useState<Notification[]>(demoNotifications);
   const [filterType, setFilterType] = useState<string>('all');
   const [filterPriority, setFilterPriority] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');

@@ -16,6 +16,7 @@ import {
   Search,
   UserPlus
 } from 'lucide-react';
+import { technicians as demoTechnicians } from '@/data/demo';
 
 interface Technician {
   id: string;
@@ -38,99 +39,8 @@ interface Technician {
   nextAvailable?: string;
 }
 
-const mockTechnicians: Technician[] = [
-  {
-    id: '1',
-    name: 'Alex Rodriguez',
-    email: 'alex.rodriguez@company.com',
-    phone: '(555) 123-4567',
-    status: 'Available',
-    specialties: ['HVAC Systems', 'Electrical Work', 'Garage Door Installation'],
-    certifications: ['EPA 608 Universal', 'NATE Certified', 'OSHA 30-Hour'],
-    rating: 4.9,
-    completedJobs: 247,
-    location: {
-      address: '123 Main St, Downtown',
-      lat: 37.7749,
-      lng: -122.4194
-    },
-    experience: '8 years',
-    joinDate: '2016-03-15'
-  },
-  {
-    id: '2',
-    name: 'Carlos Mendez',
-    email: 'carlos.mendez@company.com',
-    phone: '(555) 234-5678',
-    status: 'Busy',
-    specialties: ['Plumbing', 'Water Heater Installation', 'Drain Cleaning'],
-    certifications: ['Master Plumber License', 'Backflow Prevention', 'Green Plumber'],
-    rating: 4.8,
-    completedJobs: 189,
-    location: {
-      address: '456 Oak Ave, Northside',
-      lat: 37.7849,
-      lng: -122.4094
-    },
-    experience: '6 years',
-    joinDate: '2018-07-22',
-    nextAvailable: '2:30 PM'
-  },
-  {
-    id: '3',
-    name: 'Jessica Taylor',
-    email: 'jessica.taylor@company.com',
-    phone: '(555) 345-6789',
-    status: 'Available',
-    specialties: ['Electrical Systems', 'Smart Home Installation', 'Panel Upgrades'],
-    certifications: ['Master Electrician', 'Smart Home Certified', 'Code Compliance'],
-    rating: 4.7,
-    completedJobs: 156,
-    location: {
-      address: '789 Pine Rd, Westside',
-      lat: 37.7649,
-      lng: -122.4294
-    },
-    experience: '5 years',
-    joinDate: '2019-01-10'
-  },
-  {
-    id: '4',
-    name: 'David Brown',
-    email: 'david.brown@company.com',
-    phone: '(555) 456-7890',
-    status: 'Available',
-    specialties: ['General Maintenance', 'Appliance Repair', 'Handyman Services'],
-    certifications: ['General Contractor', 'Appliance Repair Certified', 'Safety Training'],
-    rating: 4.8,
-    completedJobs: 203,
-    location: null,
-    experience: '7 years',
-    joinDate: '2017-09-05'
-  },
-  {
-    id: '5',
-    name: 'Maria Garcia',
-    email: 'maria.garcia@company.com',
-    phone: '(555) 567-8901',
-    status: 'Off Duty',
-    specialties: ['HVAC Specialist', 'Air Quality Systems', 'Energy Efficiency'],
-    certifications: ['HVAC Excellence', 'Energy Star Certified', 'Indoor Air Quality'],
-    rating: 4.9,
-    completedJobs: 178,
-    location: {
-      address: '321 Cedar Ln, Southside',
-      lat: 37.7549,
-      lng: -122.4394
-    },
-    experience: '4 years',
-    joinDate: '2020-05-18',
-    nextAvailable: 'Tomorrow 8:00 AM'
-  }
-];
-
 export function EnhancedTechnicians() {
-  const [technicians] = useState<Technician[]>(mockTechnicians);
+  const [technicians] = useState<Technician[]>(demoTechnicians);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [specialtyFilter, setSpecialtyFilter] = useState<string>('all');

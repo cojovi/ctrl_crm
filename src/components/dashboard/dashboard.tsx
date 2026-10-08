@@ -9,6 +9,7 @@ import { ReportsTab } from './reports-tab';
 import { NotificationsTab } from './notifications-tab';
 import { EnhancedTechnicians } from './enhanced-technicians';
 import { EnhancedCustomers } from './enhanced-customers';
+import { appointments, newLeadCount, upcomingAppointments } from '@/data/demo';
 
 export function Dashboard() {
   return (
@@ -41,7 +42,7 @@ export function Dashboard() {
               <div className="bg-card rounded-lg border p-6">
                 <h3 className="text-lg font-semibold mb-4">Recent Leads</h3>
                 <p className="text-sm text-muted-foreground mb-4">
-                  You have 12 new leads this week
+                  {newLeadCount} new leads in the current list
                 </p>
                 <RecentLeads />
               </div>
@@ -50,7 +51,7 @@ export function Dashboard() {
           <div className="bg-card rounded-lg border p-6">
             <h3 className="text-lg font-semibold mb-4">Upcoming Appointments</h3>
             <p className="text-sm text-muted-foreground mb-4">
-              You have 8 appointments scheduled
+              {upcomingAppointments.length} upcoming of {appointments.length} jobs this week
             </p>
             <UpcomingAppointments />
           </div>

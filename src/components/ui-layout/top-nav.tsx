@@ -1,7 +1,10 @@
 import { Bell, Search } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { MobileSidebar } from './sidebar';
+import { useAuth } from '@/components/auth/auth-provider';
+import { notifications } from '@/data/demo';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,6 +16,14 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export function TopNav() {
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate('/login');
+  };
+
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
       <MobileSidebar />
@@ -35,7 +46,7 @@ export function TopNav() {
           >
             <Bell className="h-4 w-4" />
             <span className="absolute -right-0.5 -top-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-teal-500 text-[10px] font-medium text-white">
-              3
+              {notifications.filter((item) => !item.read).length}
             </span>
             <span className="sr-only">Notifications</span>
           </Button>
@@ -48,17 +59,17 @@ export function TopNav() {
               >
                 <Avatar className="h-8 w-8">
                   <AvatarImage src="/placeholder-user.jpg" alt="User" />
-                  <AvatarFallback>JD</AvatarFallback>
+                  <AvatarFallback>AD</AvatarFallback>
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuLabel>{user?.username ?? 'Admin'}</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>Profile</DropdownMenuItem>
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Log out</DropdownMenuItem>
+              <DropdownMenuItem onClick={handleSignOut}>Log out</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

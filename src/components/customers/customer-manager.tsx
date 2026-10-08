@@ -20,6 +20,7 @@ import {
   History
 } from 'lucide-react';
 import { format } from 'date-fns';
+import { customers as demoCustomers } from '@/data/demo';
 
 interface Customer {
   id: string;
@@ -40,154 +41,8 @@ interface Customer {
   customerSince: string;
 }
 
-const mockCustomers: Customer[] = [
-  {
-    id: '1',
-    name: 'John Smith',
-    email: 'john.smith@email.com',
-    phone: '(555) 123-4567',
-    address: '123 Main Street',
-    city: 'San Francisco',
-    state: 'CA',
-    zip: '94105',
-    status: 'VIP',
-    totalSpent: 4850.00,
-    lastService: '2025-01-10',
-    nextMaintenance: '2025-03-15',
-    serviceCount: 8,
-    notes: 'VIP customer - always requests Alex Rodriguez. Prefers morning appointments.',
-    joinDate: '2023-05-15',
-    customerSince: '1 year 8 months'
-  },
-  {
-    id: '2',
-    name: 'Sarah Johnson',
-    email: 'sarah.johnson@email.com',
-    phone: '(555) 234-5678',
-    address: '456 Oak Avenue',
-    city: 'Oakland',
-    state: 'CA',
-    zip: '94610',
-    status: 'Active',
-    totalSpent: 2340.00,
-    lastService: '2025-01-08',
-    nextMaintenance: '2025-04-08',
-    serviceCount: 5,
-    notes: 'Has two dogs - ring doorbell instead of knocking.',
-    joinDate: '2022-09-12',
-    customerSince: '2 years 4 months'
-  },
-  {
-    id: '3',
-    name: 'Michael Brown',
-    email: 'michael.brown@email.com',
-    phone: '(555) 345-6789',
-    address: '789 Pine Road',
-    city: 'Berkeley',
-    state: 'CA',
-    zip: '94704',
-    status: 'Active',
-    totalSpent: 1890.00,
-    lastService: '2024-12-15',
-    nextMaintenance: '2025-06-15',
-    serviceCount: 3,
-    notes: 'Works from home - any time is convenient.',
-    joinDate: '2024-06-20',
-    customerSince: '7 months'
-  },
-  {
-    id: '4',
-    name: 'Emily Davis',
-    email: 'emily.davis@email.com',
-    phone: '(555) 456-7890',
-    address: '321 Cedar Lane',
-    city: 'San Mateo',
-    state: 'CA',
-    zip: '94401',
-    status: 'Inactive',
-    totalSpent: 620.00,
-    lastService: '2024-08-30',
-    serviceCount: 2,
-    notes: 'Customer moved - update address if they contact us.',
-    joinDate: '2021-03-15',
-    customerSince: '3 years 10 months'
-  },
-  {
-    id: '5',
-    name: 'Robert Wilson',
-    email: 'robert.wilson@email.com',
-    phone: '(555) 567-8901',
-    address: '654 Elm Street',
-    city: 'San Jose',
-    state: 'CA',
-    zip: '95112',
-    status: 'Active',
-    totalSpent: 3200.00,
-    lastService: '2025-01-05',
-    nextMaintenance: '2025-02-20',
-    serviceCount: 6,
-    notes: 'Prefers weekend appointments. Emergency contact: (555) 567-8902',
-    joinDate: '2022-11-08',
-    customerSince: '2 years 2 months'
-  },
-  {
-    id: '6',
-    name: 'Lisa Anderson',
-    email: 'lisa.anderson@email.com',
-    phone: '(555) 678-9012',
-    address: '987 Maple Drive',
-    city: 'Fremont',
-    state: 'CA',
-    zip: '94536',
-    status: 'VIP',
-    totalSpent: 6750.00,
-    lastService: '2025-01-12',
-    nextMaintenance: '2025-03-10',
-    serviceCount: 12,
-    notes: 'Business owner - prefers detailed invoices. Multiple properties.',
-    joinDate: '2021-08-22',
-    customerSince: '3 years 5 months'
-  },
-  {
-    id: '7',
-    name: 'James Martinez',
-    email: 'james.martinez@email.com',
-    phone: '(555) 789-0123',
-    address: '159 Birch Avenue',
-    city: 'Hayward',
-    state: 'CA',
-    zip: '94541',
-    status: 'Active',
-    totalSpent: 1450.00,
-    lastService: '2024-12-20',
-    nextMaintenance: '2025-04-20',
-    serviceCount: 4,
-    notes: 'Senior citizen discount applied. Prefers technician Carlos.',
-    joinDate: '2023-02-14',
-    customerSince: '1 year 11 months'
-  },
-  {
-    id: '8',
-    name: 'Jennifer Lee',
-    email: 'jennifer.lee@email.com',
-    phone: '(555) 890-1234',
-    address: '753 Walnut Street',
-    city: 'Mountain View',
-    state: 'CA',
-    zip: '94041',
-    status: 'Active',
-    totalSpent: 2890.00,
-    lastService: '2025-01-03',
-    nextMaintenance: '2025-05-03',
-    serviceCount: 7,
-    notes: 'Tech-savvy customer. Prefers text communication and smart home integrations.',
-    joinDate: '2022-07-19',
-    customerSince: '2 years 6 months'
-  }
-];
-
 export function CustomerManager() {
-  const [customers] = useState<Customer[]>(mockCustomers);
+  const [customers] = useState<Customer[]>(demoCustomers);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('name');

@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dialog';
 import { ScheduleAppointmentForm } from './schedule-appointment-form';
 import { TechnicianFilter } from './technician-filter';
+import { appointments as demoAppointments } from '@/data/demo';
 
 interface Appointment {
   id: string;
@@ -29,7 +30,7 @@ interface Appointment {
 export function ScheduleView() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [openDialog, setOpenDialog] = useState(false);
-  const [appointments] = useState<Appointment[]>(mockAppointments);
+  const [appointments] = useState<Appointment[]>(demoAppointments);
   const [selectedTechnicians, setSelectedTechnicians] = useState<string[]>([]);
 
   const startDate = startOfWeek(selectedDate, { weekStartsOn: 1 });
@@ -159,56 +160,3 @@ function AppointmentCard({ appointment }: { appointment: Appointment }) {
     </Card>
   );
 }
-
-const mockAppointments: Appointment[] = [
-  {
-    id: '1',
-    customerName: 'John Smith',
-    serviceType: 'Installation',
-    location: '123 Main St, Anytown, CA',
-    status: 'Confirmed',
-    technicianId: 'tech-1',
-    start: new Date(2025, 5, 10, 9, 0),
-    end: new Date(2025, 5, 10, 11, 0),
-  },
-  {
-    id: '2',
-    customerName: 'Sarah Johnson',
-    serviceType: 'Repair',
-    location: '456 Oak Ave, Somewhere, CA',
-    status: 'In Progress',
-    technicianId: 'tech-2',
-    start: new Date(2025, 5, 11, 13, 0),
-    end: new Date(2025, 5, 11, 15, 0),
-  },
-  {
-    id: '3',
-    customerName: 'Michael Williams',
-    serviceType: 'Inspection',
-    location: '789 Pine Rd, Nowhere, CA',
-    status: 'Completed',
-    technicianId: 'tech-1',
-    start: new Date(2025, 5, 12, 10, 0),
-    end: new Date(2025, 5, 12, 11, 0),
-  },
-  {
-    id: '4',
-    customerName: 'Emily Brown',
-    serviceType: 'Installation',
-    location: '101 Cedar Ln, Anytown, CA',
-    status: 'Cancelled',
-    technicianId: 'tech-3',
-    start: new Date(2025, 5, 13, 14, 0),
-    end: new Date(2025, 5, 13, 16, 0),
-  },
-  {
-    id: '5',
-    customerName: 'James Taylor',
-    serviceType: 'Repair',
-    location: '202 Elm St, Somewhere, CA',
-    status: 'Confirmed',
-    technicianId: 'tech-2',
-    start: new Date(2025, 5, 14, 9, 0),
-    end: new Date(2025, 5, 14, 10, 30),
-  },
-];

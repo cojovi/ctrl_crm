@@ -18,8 +18,8 @@ import { useAuth } from './auth-provider';
 import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
-  email: z.string().email({ message: 'Please enter a valid email address.' }),
-  password: z.string().min(6, { message: 'Password must be at least 6 characters.' }),
+  username: z.string().min(1, { message: 'Enter your login.' }),
+  password: z.string().min(1, { message: 'Enter your password.' }),
 });
 
 export function LoginForm() {
@@ -32,7 +32,7 @@ export function LoginForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: '',
+      username: '',
       password: '',
     },
   });
@@ -40,7 +40,7 @@ export function LoginForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setLoading(true);
     try {
-      await signIn(values.email, values.password);
+      await signIn(values.username, values.password);
       toast({
         title: 'Logged in successfully',
         description: 'Welcome back!',
@@ -74,12 +74,12 @@ export function LoginForm() {
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
                 control={form.control}
-                name="email"
+                name="username"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>Login</FormLabel>
                     <FormControl>
-                      <Input placeholder="name@example.com" {...field} />
+                      <Input placeholder="admin" autoComplete="username" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

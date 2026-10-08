@@ -2,12 +2,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
-
-interface Technician {
-  id: string;
-  name: string;
-  color: string;
-}
+import { technicians } from '@/data/demo';
 
 interface TechnicianFilterProps {
   onChange: (technicianIds: string[]) => void;
@@ -51,11 +46,3 @@ export function TechnicianFilter({ onChange, selectedTechnicians }: TechnicianFi
     </Card>
   );
 }
-
-const technicians: Technician[] = [
-  { id: 'tech-1', name: 'Alex Rodriguez', color: 'bg-teal-500' },
-  { id: 'tech-2', name: 'Carlos Mendez', color: 'bg-amber-500' },
-  { id: 'tech-3', name: 'Jessica Taylor', color: 'bg-purple-500' },
-  { id: 'tech-4', name: 'David Brown', color: 'bg-lime-500' },
-  { id: 'tech-5', name: 'Maria Garcia', color: 'bg-blue-500' },
-];

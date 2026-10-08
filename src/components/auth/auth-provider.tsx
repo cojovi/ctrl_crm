@@ -1,8 +1,12 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { supabase } from '@/lib/supabase';
+
+const DEMO_LOGIN = 'admin';
+const DEMO_PASSWORD = 'bluemoon25';
+const SESSION_KEY = 'ctrl-crm-demo-session';
 
 type User = {
   id: string;
+  username: string;
   email: string;
   role: string;
 };
@@ -10,8 +14,15 @@ type User = {
 type AuthContextType = {
   user: User | null;
   loading: boolean;
-  signIn: (email: string, password: string) => Promise<void>;
+  signIn: (username: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
+};
+
+const demoUser: User = {
+  id: 'admin',
+  username: 'admin',
+  email: 'admin@ctrlaltgarage.com',
+  role: 'admin',
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -21,80 +32,39 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check for active session on mount
-    const checkSession = async () => {
+    const saved = sessionStorage.getItem(SESSION_KEY);
+    if (saved) {
       try {
-        const { data: { session } } = await supabase.auth.getSession();
-        
-        if (session) {
-          // In a real app, we would fetch user role from a database
-          setUser({
-            id: session.user.id,
-            email: session.user.email!,
-            role: 'admin',
-          });
-        }
-      } catch (error) {
-        console.error('Error checking session:', error);
-      } finally {
-        setLoading(false);
+        setUser(JSON.parse(saved) as User);
+      } catch {
+        sessionStorage.removeItem(SESSION_KEY);
       }
-    };
-
-    checkSession();
-
-    // Set up auth state change listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (_, session) => {
-        if (session) {
-          setUser({
-            id: session.user.id,
-            email: session.user.email!,
-            role: 'admin',
-          });
-        } else {
-          setUser(null);
-        }
-        setLoading(false);
-      }
-    );
-
-    return () => {
-      subscription.unsubscribe();
-    };
+    }
+    setLoading(false);
   }, []);
 
-  const signIn = async (email: string, password: string) => {
-    try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-      
-      if (error) throw error;
-    } catch (error) {
-      console.error('Error signing in:', error);
-      throw error;
+  const signIn = async (username: string, password: string) => {
+    const matches =
+      username.trim().toLowerCase() === DEMO_LOGIN && password === DEMO_PASSWORD;
+
+    if (!matches) {
+      throw new Error('Invalid login');
     }
+
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(demoUser));
+    setUser(demoUser);
   };
 
   const signOut = async () => {
-    try {
-      await supabase.auth.signOut();
-    } catch (error) {
-      console.error('Error signing out:', error);
-      throw error;
-    }
+    sessionStorage.removeItem(SESSION_KEY);
+    setUser(null);
   };
 
-  const value = {
-    user,
-    loading,
-    signIn,
-    signOut,
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, loading, signIn, signOut }}>
+      {children}
+    </AuthContext.Provider>
+  );
 }
 
 export function useAuth() {

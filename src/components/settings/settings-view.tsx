@@ -466,7 +466,10 @@ export function SettingsView() {
                   {[
                     { name: 'Admin User', email: 'admin@ctrlaltgarage.com', role: 'Administrator', status: 'Active' },
                     { name: 'Sarah Manager', email: 'sarah@ctrlaltgarage.com', role: 'Manager', status: 'Active' },
-                    { name: 'John Dispatcher', email: 'john@ctrlaltgarage.com', role: 'Dispatcher', status: 'Active' }
+                    { name: 'John Dispatcher', email: 'john@ctrlaltgarage.com', role: 'Dispatcher', status: 'Active' },
+                    { name: 'Priya Shah', email: 'priya.shah@ctrlaltgarage.com', role: 'Technician', status: 'Active' },
+                    { name: 'Nate Coleman', email: 'nate.coleman@ctrlaltgarage.com', role: 'Technician', status: 'Active' },
+                    { name: 'Elena Vasquez', email: 'elena.vasquez@ctrlaltgarage.com', role: 'Technician', status: 'On route' },
                   ].map((user, index) => (
                     <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
                       <div>

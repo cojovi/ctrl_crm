@@ -8,13 +8,14 @@ import { ArrowLeft, Edit, PenLine, Calendar, User, Phone, MapPin, Mail } from 'l
 import { LeadTimeline } from './lead-timeline';
 import { LeadQuoteForm } from './lead-quote-form';
 import { cn } from '@/lib/utils';
+import { leads as demoLeads } from '@/data/demo';
 
 export function LeadDetails() {
   const { id } = useParams<{ id: string }>();
   const [currentTab, setCurrentTab] = useState('overview');
   
   // In a real app, we would fetch the lead details from the API
-  const lead = mockLeads.find((lead) => lead.id === id);
+  const lead = demoLeads.find((lead) => lead.id === id);
   
   if (!lead) {
     return <div>Lead not found</div>;
@@ -185,24 +186,3 @@ function LeadStatusBadge({ status }: { status: string }) {
     </Badge>
   );
 }
-
-const mockLeads = [
-  {
-    id: '1',
-    customerName: 'John Smith',
-    email: 'john.smith@example.com',
-    phone: '(555) 123-4567',
-    address: '123 Main St, Anytown, CA 90210',
-    status: 'New',
-    serviceType: 'Installation',
-    source: 'Website',
-    doorType: 'Sectional',
-    doorSize: '16x7',
-    material: 'Steel',
-    color: 'White',
-    windows: 'Cascade',
-    opener: 'Belt Drive',
-    notes: 'Customer is looking for a new garage door installation. They prefer a white sectional door with windows. They are flexible with installation timing.',
-  },
-  // More lead data would be here
-];

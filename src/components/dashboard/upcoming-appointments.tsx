@@ -1,6 +1,7 @@
 import { CalendarClock, User, MapPin, PenTool as Tool } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { upcomingAppointments as appointments } from '@/data/demo';
 
 export function UpcomingAppointments() {
   return (
@@ -62,36 +63,3 @@ function Badge({ status }: { status: string }) {
     </div>
   );
 }
-
-const appointments = [
-  {
-    id: '1',
-    serviceType: 'Garage Door Installation',
-    date: 'Today',
-    time: '2:00 PM - 4:00 PM',
-    customer: 'Michael Johnson',
-    location: '123 Main St, Anytown, CA',
-    technician: 'Alex Rodriguez',
-    status: 'Confirmed',
-  },
-  {
-    id: '2',
-    serviceType: 'Spring Replacement',
-    date: 'Tomorrow',
-    time: '9:00 AM - 11:00 AM',
-    customer: 'Sarah Williams',
-    location: '456 Oak Ave, Somewhere, CA',
-    technician: 'Carlos Mendez',
-    status: 'Pending',
-  },
-  {
-    id: '3',
-    serviceType: 'Opener Repair',
-    date: 'Jun 12',
-    time: '1:00 PM - 2:00 PM',
-    customer: 'David Brown',
-    location: '789 Pine Rd, Nowhere, CA',
-    technician: 'Jessica Taylor',
-    status: 'In Progress',
-  },
-];

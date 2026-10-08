@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { recentLeads } from '@/data/demo';
 
 export function RecentLeads() {
   return (
@@ -36,41 +37,3 @@ export function RecentLeads() {
     </div>
   );
 }
-
-const recentLeads = [
-  {
-    id: '1',
-    name: 'Olivia Martin',
-    email: 'olivia.martin@email.com',
-    avatar: '/placeholder-user.jpg',
-    status: 'New',
-  },
-  {
-    id: '2',
-    name: 'Jackson Lee',
-    email: 'jackson.lee@email.com',
-    avatar: '/placeholder-user.jpg',
-    status: 'In Progress',
-  },
-  {
-    id: '3',
-    name: 'Isabella Nguyen',
-    email: 'isabella.nguyen@email.com',
-    avatar: '/placeholder-user.jpg',
-    status: 'Quote Sent',
-  },
-  {
-    id: '4',
-    name: 'William Kim',
-    email: 'will.kim@email.com',
-    avatar: '/placeholder-user.jpg',
-    status: 'New',
-  },
-  {
-    id: '5',
-    name: 'Sofia Davis',
-    email: 'sofia.davis@email.com',
-    avatar: '/placeholder-user.jpg',
-    status: 'In Progress',
-  },
-];

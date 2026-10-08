@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
+import { leads as demoLeads } from '@/data/demo';
 
 interface Lead {
   id: string;
@@ -28,7 +29,7 @@ export function LeadsList({ searchQuery }: LeadsListProps) {
   // Simulate API call to fetch leads
   useEffect(() => {
     // This would be replaced with an actual API call
-    setLeads(mockLeads);
+    setLeads(demoLeads);
   }, []);
 
   // Filter leads based on search query
@@ -109,86 +110,3 @@ function LeadStatusBadge({ status }: { status: string }) {
     </Badge>
   );
 }
-
-const mockLeads: Lead[] = [
-  {
-    id: '1',
-    customer: 'John Smith',
-    email: 'john.smith@example.com',
-    phone: '(555) 123-4567',
-    status: 'New',
-    serviceType: 'Installation',
-    createdAt: '2025-05-01T09:00:00Z',
-    value: 1200.0,
-  },
-  {
-    id: '2',
-    customer: 'Sarah Johnson',
-    email: 'sarah.j@example.com',
-    phone: '(555) 234-5678',
-    status: 'In Progress',
-    serviceType: 'Repair',
-    createdAt: '2025-05-02T10:30:00Z',
-    value: 350.0,
-  },
-  {
-    id: '3',
-    customer: 'Michael Williams',
-    email: 'michael.w@example.com',
-    phone: '(555) 345-6789',
-    status: 'Quote Sent',
-    serviceType: 'Replacement',
-    createdAt: '2025-05-03T14:15:00Z',
-    value: 850.0,
-  },
-  {
-    id: '4',
-    customer: 'Emily Brown',
-    email: 'emily.b@example.com',
-    phone: '(555) 456-7890',
-    status: 'Closed Won',
-    serviceType: 'Installation',
-    createdAt: '2025-05-04T11:45:00Z',
-    value: 1500.0,
-  },
-  {
-    id: '5',
-    customer: 'James Taylor',
-    email: 'james.t@example.com',
-    phone: '(555) 567-8901',
-    status: 'Closed Lost',
-    serviceType: 'Repair',
-    createdAt: '2025-05-05T13:20:00Z',
-    value: 275.0,
-  },
-  {
-    id: '6',
-    customer: 'Jennifer Davis',
-    email: 'jennifer.d@example.com',
-    phone: '(555) 678-9012',
-    status: 'New',
-    serviceType: 'Inspection',
-    createdAt: '2025-05-06T15:30:00Z',
-    value: 150.0,
-  },
-  {
-    id: '7',
-    customer: 'Robert Miller',
-    email: 'robert.m@example.com',
-    phone: '(555) 789-0123',
-    status: 'In Progress',
-    serviceType: 'Replacement',
-    createdAt: '2025-05-07T09:10:00Z',
-    value: 950.0,
-  },
-  {
-    id: '8',
-    customer: 'Lisa Wilson',
-    email: 'lisa.w@example.com',
-    phone: '(555) 890-1234',
-    status: 'Quote Sent',
-    serviceType: 'Installation',
-    createdAt: '2025-05-08T10:45:00Z',
-    value: 1350.0,
-  },
-];

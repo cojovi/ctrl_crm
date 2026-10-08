@@ -30,6 +30,7 @@ import {
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+import { customers, technicians } from '@/data/demo';
 
 const formSchema = z.object({
   customerId: z.string().min(1, 'Customer is required'),
@@ -305,22 +306,6 @@ export function ScheduleAppointmentForm({ onClose }: ScheduleAppointmentFormProp
     </Form>
   );
 }
-
-const customers = [
-  { id: 'cust-1', name: 'John Smith' },
-  { id: 'cust-2', name: 'Sarah Johnson' },
-  { id: 'cust-3', name: 'Michael Williams' },
-  { id: 'cust-4', name: 'Emily Brown' },
-  { id: 'cust-5', name: 'James Taylor' },
-];
-
-const technicians = [
-  { id: 'tech-1', name: 'Alex Rodriguez' },
-  { id: 'tech-2', name: 'Carlos Mendez' },
-  { id: 'tech-3', name: 'Jessica Taylor' },
-  { id: 'tech-4', name: 'David Brown' },
-  { id: 'tech-5', name: 'Maria Garcia' },
-];
 
 const timeSlots = [
   '8:00 AM', '8:30 AM', '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM',

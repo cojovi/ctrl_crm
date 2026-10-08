@@ -19,6 +19,7 @@ import {
   UserPlus
 } from 'lucide-react';
 import { format } from 'date-fns';
+import { customers as demoCustomers } from '@/data/demo';
 
 interface Customer {
   id: string;
@@ -61,110 +62,8 @@ interface Equipment {
   nextMaintenance: string;
 }
 
-const mockCustomers: Customer[] = [
-  {
-    id: '1',
-    name: 'John Smith',
-    email: 'john.smith@email.com',
-    phone: '(555) 123-4567',
-    address: '123 Main Street',
-    city: 'San Francisco',
-    state: 'CA',
-    zip: '94105',
-    status: 'VIP',
-    totalSpent: 4850.00,
-    lastService: '2025-01-10',
-    nextMaintenance: '2025-03-15',
-    serviceHistory: [
-      { id: '1', date: '2025-01-10', service: 'Garage Door Installation', technician: 'Alex Rodriguez', amount: 1200, status: 'Completed' },
-      { id: '2', date: '2024-11-15', service: 'Maintenance Check', technician: 'Carlos Mendez', amount: 150, status: 'Completed' },
-      { id: '3', date: '2024-08-20', service: 'Spring Replacement', technician: 'Alex Rodriguez', amount: 350, status: 'Completed' }
-    ],
-    equipment: [
-      { id: '1', type: 'Garage Door', model: 'Clopay Gallery Series', installDate: '2023-05-15', warrantyExpires: '2028-05-15', lastMaintenance: '2025-01-10', nextMaintenance: '2025-07-10' }
-    ],
-    preferences: ['Weekend appointments', 'Email reminders', 'Text notifications'],
-    notes: 'VIP customer - always requests Alex Rodriguez. Prefers morning appointments.',
-    joinDate: '2023-05-15',
-    customerSince: '1 year 8 months'
-  },
-  {
-    id: '2',
-    name: 'Sarah Johnson',
-    email: 'sarah.johnson@email.com',
-    phone: '(555) 234-5678',
-    address: '456 Oak Avenue',
-    city: 'Oakland',
-    state: 'CA',
-    zip: '94610',
-    status: 'Active',
-    totalSpent: 2340.00,
-    lastService: '2025-01-08',
-    nextMaintenance: '2025-04-08',
-    serviceHistory: [
-      { id: '1', date: '2025-01-08', service: 'Opener Repair', technician: 'Jessica Taylor', amount: 285, status: 'Completed' },
-      { id: '2', date: '2024-09-12', service: 'Annual Maintenance', technician: 'David Brown', amount: 120, status: 'Completed' }
-    ],
-    equipment: [
-      { id: '1', type: 'Garage Door Opener', model: 'LiftMaster 8500W', installDate: '2022-09-12', warrantyExpires: '2027-09-12', lastMaintenance: '2025-01-08', nextMaintenance: '2025-04-08' }
-    ],
-    preferences: ['Evening appointments', 'Phone calls only'],
-    notes: 'Has two dogs - ring doorbell instead of knocking.',
-    joinDate: '2022-09-12',
-    customerSince: '2 years 4 months'
-  },
-  {
-    id: '3',
-    name: 'Michael Brown',
-    email: 'michael.brown@email.com',
-    phone: '(555) 345-6789',
-    address: '789 Pine Road',
-    city: 'Berkeley',
-    state: 'CA',
-    zip: '94704',
-    status: 'Active',
-    totalSpent: 1890.00,
-    lastService: '2024-12-15',
-    serviceHistory: [
-      { id: '1', date: '2024-12-15', service: 'Emergency Repair', technician: 'Carlos Mendez', amount: 425, status: 'Completed' },
-      { id: '2', date: '2024-06-20', service: 'Installation', technician: 'Alex Rodriguez', amount: 950, status: 'Completed' }
-    ],
-    equipment: [
-      { id: '1', type: 'Garage Door', model: 'Amarr Classica', installDate: '2024-06-20', warrantyExpires: '2029-06-20', lastMaintenance: '2024-12-15', nextMaintenance: '2025-06-20' }
-    ],
-    preferences: ['Flexible timing', 'Text notifications'],
-    notes: 'Works from home - any time is convenient.',
-    joinDate: '2024-06-20',
-    customerSince: '7 months'
-  },
-  {
-    id: '4',
-    name: 'Emily Davis',
-    email: 'emily.davis@email.com',
-    phone: '(555) 456-7890',
-    address: '321 Cedar Lane',
-    city: 'San Mateo',
-    state: 'CA',
-    zip: '94401',
-    status: 'Inactive',
-    totalSpent: 620.00,
-    lastService: '2024-08-30',
-    serviceHistory: [
-      { id: '1', date: '2024-08-30', service: 'Maintenance', technician: 'Maria Garcia', amount: 135, status: 'Completed' },
-      { id: '2', date: '2024-03-15', service: 'Repair', technician: 'David Brown', amount: 485, status: 'Completed' }
-    ],
-    equipment: [
-      { id: '1', type: 'Garage Door Opener', model: 'Chamberlain B970', installDate: '2021-03-15', warrantyExpires: '2024-03-15', lastMaintenance: '2024-08-30', nextMaintenance: 'Overdue' }
-    ],
-    preferences: ['Email only', 'Daytime appointments'],
-    notes: 'Customer moved - update address if they contact us.',
-    joinDate: '2021-03-15',
-    customerSince: '3 years 10 months'
-  }
-];
-
 export function EnhancedCustomers() {
-  const [customers] = useState<Customer[]>(mockCustomers);
+  const [customers] = useState<Customer[]>(demoCustomers);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('name');

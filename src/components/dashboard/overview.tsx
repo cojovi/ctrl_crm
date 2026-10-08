@@ -1,14 +1,12 @@
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { revenueByMonth } from '@/data/demo';
 
-const data = [
-  { name: 'Jan', revenue: 4000, appointments: 2400, leads: 2400 },
-  { name: 'Feb', revenue: 3000, appointments: 1398, leads: 2210 },
-  { name: 'Mar', revenue: 2000, appointments: 9800, leads: 2290 },
-  { name: 'Apr', revenue: 2780, appointments: 3908, leads: 2000 },
-  { name: 'May', revenue: 1890, appointments: 4800, leads: 2181 },
-  { name: 'Jun', revenue: 2390, appointments: 3800, leads: 2500 },
-  { name: 'Jul', revenue: 3490, appointments: 4300, leads: 2100 },
-];
+const data = revenueByMonth.map((month) => ({
+  name: month.name,
+  'Revenue ($k)': Math.round(month.revenue / 1000),
+  Appointments: month.appointments,
+  Leads: month.leads,
+}));
 
 export function Overview() {
   return (
@@ -38,21 +36,21 @@ export function Overview() {
         <Legend />
         <Area
           type="monotone"
-          dataKey="revenue"
+          dataKey="Revenue ($k)"
           stroke="hsl(var(--chart-1))"
           fillOpacity={1}
           fill="url(#colorRevenue)"
         />
         <Area
           type="monotone"
-          dataKey="appointments"
+          dataKey="Appointments"
           stroke="hsl(var(--chart-2))"
           fillOpacity={1}
           fill="url(#colorAppointments)"
         />
         <Area
           type="monotone"
-          dataKey="leads"
+          dataKey="Leads"
           stroke="hsl(var(--chart-3))"
           fillOpacity={1}
           fill="url(#colorLeads)"

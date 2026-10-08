@@ -66,6 +66,30 @@ const technicianPerformance = [
     revenue: 8380,
     efficiency: 95 
   },
+  {
+    name: 'Priya Shah',
+    callsCompleted: 39,
+    avgResponseTime: 34,
+    customerRating: 4.8,
+    revenue: 14220,
+    efficiency: 93
+  },
+  {
+    name: 'Nate Coleman',
+    callsCompleted: 36,
+    avgResponseTime: 26,
+    customerRating: 4.6,
+    revenue: 7640,
+    efficiency: 91
+  },
+  {
+    name: 'Elena Vasquez',
+    callsCompleted: 41,
+    avgResponseTime: 30,
+    customerRating: 4.9,
+    revenue: 11870,
+    efficiency: 97
+  },
 ];
 
 const customerFeedback = [
@@ -96,6 +120,27 @@ const customerFeedback = [
     service: 'Emergency', 
     feedback: 'Fast emergency response, helpful staff',
     date: '2025-01-12'
+  },
+  {
+    customer: 'Jennifer Lee',
+    rating: 5,
+    service: 'Opener Upgrade',
+    feedback: 'myQ was working before the tech left the driveway',
+    date: '2026-09-30'
+  },
+  {
+    customer: 'Daniel Okonkwo',
+    rating: 5,
+    service: 'Commercial',
+    feedback: 'Bay door was back online the same afternoon',
+    date: '2026-10-07'
+  },
+  {
+    customer: 'Lisa Anderson',
+    rating: 5,
+    service: 'Maintenance',
+    feedback: 'Invoice matched the rental-property checklist',
+    date: '2026-10-06'
   },
 ];
 
