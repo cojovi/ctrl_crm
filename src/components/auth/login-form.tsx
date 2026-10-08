@@ -59,17 +59,42 @@ export function LoginForm() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col justify-center px-6 py-12">
-      <div className="mx-auto w-full max-w-md">
-        <div className="flex flex-col items-center space-y-2 text-center">
-          <GanttChartSquare className="h-10 w-10 text-teal-500" />
-          <h1 className="text-2xl font-bold">Ctrl + Alt + Garage</h1>
-          <p className="text-sm text-muted-foreground">
-            Sign in to access your garage door service dashboard
-          </p>
+    <div className="relative flex min-h-screen items-start justify-center overflow-x-hidden px-4 py-8 lg:items-center">
+      <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-teal-400/20 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-80 w-80 rounded-full bg-amber-400/10 blur-3xl" />
+      <div className="console-panel relative grid w-full max-w-5xl overflow-hidden rounded-2xl border border-cyan-400/25 bg-slate-950/75 backdrop-blur-xl md:grid-cols-[1.05fr_0.95fr]">
+        <div className="hidden flex-col justify-between border-r border-cyan-400/15 p-10 md:flex">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-[0.28em] text-teal-300">Bay command</p>
+            <h1 className="mt-4 font-mono text-4xl font-semibold leading-tight tracking-tight">
+              Ctrl + Alt
+              <span className="block text-teal-300">+ Garage</span>
+            </h1>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              Dispatch, inventory, and the week’s door jobs on one board. Built as a show floor for the shop.
+            </p>
+          </div>
+          <dl className="grid grid-cols-3 gap-3 font-mono text-xs uppercase tracking-wider text-muted-foreground">
+            <div className="rounded-lg border border-cyan-400/15 p-3">
+              <dt>Techs</dt>
+              <dd className="mt-1 text-lg text-foreground">08</dd>
+            </div>
+            <div className="rounded-lg border border-cyan-400/15 p-3">
+              <dt>Jobs</dt>
+              <dd className="mt-1 text-lg text-foreground">16</dd>
+            </div>
+            <div className="rounded-lg border border-cyan-400/15 p-3">
+              <dt>Parts</dt>
+              <dd className="mt-1 text-lg text-foreground">22</dd>
+            </div>
+          </dl>
         </div>
-
-        <div className="mt-10">
+        <div className="p-6 sm:p-10">
+        <div className="mb-8 flex items-center gap-3 md:hidden">
+          <GanttChartSquare className="h-8 w-8 text-teal-400" />
+          <p className="font-mono text-xl font-semibold">Ctrl + Alt + Garage</p>
+        </div>
+        <p className="mb-6 hidden font-mono text-xs uppercase tracking-[0.22em] text-teal-300 md:block">Operator sign-in</p>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <FormField
@@ -123,7 +148,7 @@ export function LoginForm() {
               <div>
                 <Button
                   type="submit"
-                  className="w-full bg-teal-500 hover:bg-teal-600"
+                  className="h-11 w-full bg-teal-400 font-semibold text-slate-950 hover:bg-teal-300"
                   disabled={loading}
                 >
                   {loading ? 'Signing in...' : 'Sign in'}
@@ -132,18 +157,7 @@ export function LoginForm() {
             </form>
           </Form>
 
-          <div className="mt-6">
-            <div className="text-center text-sm">
-              <Button variant="link" className="p-0">
-                Forgot your password?
-              </Button>
-            </div>
-          </div>
         </div>
-      </div>
-      
-      <div className="mt-10 text-center text-xs text-muted-foreground">
-        &copy; 2025 Ctrl + Alt + Garage. All rights reserved.
       </div>
     </div>
   );

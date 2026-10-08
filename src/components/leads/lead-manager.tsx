@@ -30,7 +30,7 @@ export function LeadManager() {
             <div className="space-y-4">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <h2 className="text-3xl font-bold tracking-tight">Leads & Quotes</h2>
+                  <h2 className="page-title">Leads & Quotes</h2>
                   <p className="text-muted-foreground">
                     Manage your leads, create quotes, and convert to customers
                   </p>

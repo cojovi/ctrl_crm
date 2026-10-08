@@ -15,10 +15,14 @@ export function Dashboard() {
   return (
     <Layout>
       <div className="flex items-center justify-between space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+        <div>
+          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-teal-300">Floor overview</p>
+          <h2 className="page-title">Dashboard</h2>
+        </div>
       </div>
       <Tabs defaultValue="overview" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-6">
+        <div className="overflow-x-auto pb-1">
+        <TabsList className="h-auto w-max min-w-full justify-start bg-slate-950/60">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="analytics">Analytics</TabsTrigger>
           <TabsTrigger value="reports">Reports</TabsTrigger>
@@ -26,20 +30,21 @@ export function Dashboard() {
           <TabsTrigger value="technicians">Technicians</TabsTrigger>
           <TabsTrigger value="customers">Customers</TabsTrigger>
         </TabsList>
+        </div>
         
         <TabsContent value="overview" className="space-y-4">
           <StatsCards />
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-            <div className="col-span-4 space-y-4">
+          <div className="grid gap-4 lg:grid-cols-7">
+            <div className="min-w-0 space-y-4 lg:col-span-4">
               <div className="grid gap-4">
-                <div className="bg-card rounded-lg border p-6">
+                <div className="console-panel rounded-lg border border-cyan-400/20 bg-card/80 p-6 backdrop-blur-md">
                   <h3 className="text-lg font-semibold mb-4">Revenue Overview</h3>
                   <Overview />
                 </div>
               </div>
             </div>
-            <div className="col-span-3 space-y-4">
-              <div className="bg-card rounded-lg border p-6">
+            <div className="min-w-0 space-y-4 lg:col-span-3">
+              <div className="console-panel rounded-lg border border-cyan-400/20 bg-card/80 p-6 backdrop-blur-md">
                 <h3 className="text-lg font-semibold mb-4">Recent Leads</h3>
                 <p className="text-sm text-muted-foreground mb-4">
                   {newLeadCount} new leads in the current list
@@ -48,7 +53,7 @@ export function Dashboard() {
               </div>
             </div>
           </div>
-          <div className="bg-card rounded-lg border p-6">
+          <div className="console-panel rounded-lg border border-cyan-400/20 bg-card/80 p-6 backdrop-blur-md">
             <h3 className="text-lg font-semibold mb-4">Upcoming Appointments</h3>
             <p className="text-sm text-muted-foreground mb-4">
               {upcomingAppointments.length} upcoming of {appointments.length} jobs this week

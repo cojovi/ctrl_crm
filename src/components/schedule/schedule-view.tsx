@@ -57,7 +57,7 @@ export function ScheduleView() {
       <div className="space-y-4">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight">Schedule</h2>
+            <h2 className="page-title">Schedule</h2>
             <p className="text-muted-foreground">
               Manage appointments and technician schedules
             </p>
@@ -86,10 +86,10 @@ export function ScheduleView() {
             />
           </div>
 
-          <div className="flex-1 space-y-4">
+          <div className="min-w-0 flex-1 space-y-4">
             <Card>
               <CardContent className="p-6">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex items-center space-x-2">
                     <Calendar className="h-5 w-5 text-muted-foreground" />
                     <h3 className="text-lg font-medium">
@@ -108,7 +108,8 @@ export function ScheduleView() {
               </CardContent>
             </Card>
 
-            <div className="grid grid-cols-7 gap-4">
+            <div className="overflow-x-auto pb-2">
+            <div className="grid min-w-[920px] grid-cols-7 gap-3">
               {weekDays.map((day, i) => (
                 <div key={i} className="flex flex-col">
                   <div
@@ -133,6 +134,7 @@ export function ScheduleView() {
                   </div>
                 </div>
               ))}
+            </div>
             </div>
           </div>
         </div>

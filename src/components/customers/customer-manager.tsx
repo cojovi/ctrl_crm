@@ -85,7 +85,7 @@ export function CustomerManager() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight">Customer Management</h2>
+            <h2 className="page-title">Customer Management</h2>
             <p className="text-muted-foreground">
               Manage customer profiles, service history, and preferences
             </p>

@@ -91,9 +91,9 @@ export function SettingsView() {
   return (
     <Layout>
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight">Settings</h2>
+            <h2 className="page-title">Settings</h2>
             <p className="text-muted-foreground">
               Manage your business settings and preferences
             </p>
@@ -105,7 +105,8 @@ export function SettingsView() {
         </div>
 
         <Tabs defaultValue="company" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-7">
+          <div className="overflow-x-auto pb-1">
+          <TabsList className="h-auto w-max min-w-full justify-start bg-slate-950/60">
             <TabsTrigger value="company">Company</TabsTrigger>
             <TabsTrigger value="business">Business</TabsTrigger>
             <TabsTrigger value="services">Services</TabsTrigger>
@@ -114,6 +115,7 @@ export function SettingsView() {
             <TabsTrigger value="billing">Billing</TabsTrigger>
             <TabsTrigger value="system">System</TabsTrigger>
           </TabsList>
+          </div>
 
           {/* Company Information */}
           <TabsContent value="company" className="space-y-4">

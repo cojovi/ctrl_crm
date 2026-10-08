@@ -60,7 +60,7 @@ export function InventoryManager() {
       <div className="space-y-4">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight">Inventory Management</h2>
+            <h2 className="page-title">Inventory Management</h2>
             <p className="text-muted-foreground">
               {inventoryItems.length} parts on the shelf for installs, repairs, and openers
             </p>

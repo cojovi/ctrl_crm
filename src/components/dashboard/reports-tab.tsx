@@ -223,13 +223,15 @@ export function ReportsTab() {
 
       {/* Reports Tabs */}
       <Tabs defaultValue="summary" className="space-y-4">
-        <TabsList className="grid w-full grid-cols-5">
+        <div className="overflow-x-auto pb-1">
+        <TabsList className="h-auto w-max min-w-full justify-start bg-slate-950/60">
           <TabsTrigger value="summary">Service Summary</TabsTrigger>
           <TabsTrigger value="performance">Technician Performance</TabsTrigger>
           <TabsTrigger value="feedback">Customer Feedback</TabsTrigger>
           <TabsTrigger value="revenue">Revenue Analysis</TabsTrigger>
           <TabsTrigger value="equipment">Equipment Logs</TabsTrigger>
         </TabsList>
+        </div>
 
         <TabsContent value="summary" className="space-y-4">
           <Card>
